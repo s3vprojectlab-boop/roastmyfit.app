@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast My Fit // Legal</title>
+    <!-- Tech Fonts: Inter (Sleek) & Share Tech Mono (Cyber Brutalist) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF3B30;
+            --bg: #000000;
+            --card: #1C1C1E;
+            --text-main: #FFFFFF;
+            --text-secondary: #8E8E93;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glare (Matches App Pricing Glow) */
+        .ambient-glow {
+            position: fixed;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            opacity: 0.1;
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header (Symmetric with App's Pricing Header) */
+        header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            height: 80px;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--bg);
+            display: flex;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-skew-box {
+            transform: skewX(-8deg);
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            padding: 5px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            transform: skewX(8deg);
+        }
+
+        .logo-text {
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 0px;
+            transform: skewX(8deg);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .header-meta {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-secondary);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Tabs (Brutalist Skewed Tabs) */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0 30px 0;
+            padding: 0 20px;
+        }
+
+        .tabs-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: #111;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 12px 24px;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 59, 48, 0.05);
+            color: var(--primary);
+            border-color: var(--primary);
+            border-width: 2px;
+            box-shadow: 0 0 15px rgba(255, 59, 48, 0.2);
+        }
+
+        /* Content Layout */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        .content-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .content-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modern Techy Page Titles */
+        .title-section {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .last-updated {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--primary);
+            font-size: 12px;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* Brutalist Card Design (Matches App Card styles) */
+        .section-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Techy Metadata in Card Corner */
+        .card-tag {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.05);
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Cyberpunk Bullet Point Style */
+        h2::before {
+            content: '//';
+            color: var(--primary);
+        }
+
+        p {
+            color: var(--text-main);
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+
+        p.intro {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+
+        li {
+            color: var(--text-main);
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 900;
+        }
+
+        strong {
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        /* Footer (Matches Metadata on Pricing Screen) */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 20px;
+            text-align: center;
+            background-color: var(--bg);
+            position: relative;
+        }
+
+        .footer-meta-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .footer-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+        }
+
+        .footer-text-line {
+            font-family: 'Share Tech Mono', monospace;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 11px;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                height: auto;
+                gap: 10px;
+                padding: 15px;
+            }
+            .page-title {
+                font-size: 32px;
+            }
+            .section-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <header>
+        <div class="logo-skew-box">
+            <!-- App Logo (Matches active brand) -->
+            <img src="https://res.cloudinary.com/dhvlz8sfk/image/upload/v1779007219/icon_be9csc.png" alt="Roast My Fit Logo" class="logo-img">
+            <div class="logo-text">ROAST MY FIT</div>
+        </div>
+        <div class="header-meta">SYS_SECURE_AUTH // V1.02</div>
+    </header>
+
+    <div class="tabs-container">
+        <div class="tabs-wrapper">
+            <button class="tab-btn active" onclick="switchTab('privacy')">PRIVACY POLICY</button>
+            <button class="tab-btn" onclick="switchTab('terms')">TERMS OF SERVICE</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- PRIVACY POLICY SECTION -->
+        <div id="privacy" class="content-section active">
+            <div class="title-section">
+                <h1 class="page-title">Privacy Policy</h1>
+                <div class="last-updated">PROTOCOL_STABLE // MAY 17, 2026</div>
+            </div>
+
+            <p class="intro">Welcome to <strong>Roast My Fit</strong>. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application.</p>
+
+            <div class="section-card">
+                <div class="card-tag">SEC_01 // INGESTION</div>
+                <h2>Information We Collect</h2>
+                <p>We may collect the following types of information:</p>
+                <ul>
+                    <li><strong>Account Information:</strong> Auth data processed securely via Clerk (email address, name, profile picture).</li>
+                    <li><strong>User Content:</strong> Outfit photos uploaded to generate AI-driven style critiques ("roasts").</li>
+                    <li><strong>Payment Information:</strong> Handled securely by our third-party processor, Razorpay. No card details are stored on our servers.</li>
+                    <li><strong>Usage Data:</strong> Analytical telemetry regarding crash reports and app interaction metrics.</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">SEC_02 // UTILITY</div>
+                <h2>How We Use Your Information</h2>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide, operate, and maintain the App.</li>
+                    <li>Process outfit photos through Artificial Intelligence to generate roasts, scores, and suggestions.</li>
+                    <li>Manage your account, credits, and subscription status.</li>
+                    <li>Provide direct customer support.</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">SEC_03 // INTEGRATION</div>
+                <h2>How We Share Your Information</h2>
+                <p>We do not sell your personal data. We only share information with third-party service providers necessary to operate the App:</p>
+                <ul>
+                    <li><strong>Clerk:</strong> For user authentication and identity management.</li>
+                    <li><strong>Supabase:</strong> For secure backend database and image storage.</li>
+                    <li><strong>Razorpay:</strong> For processing secure payments.</li>
+                    <li><strong>AI Providers:</strong> Photos sent strictly to generate roasts. We do not use your photos to train public models.</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">SEC_04 // RETENTION</div>
+                <h2>Data Storage & Retention</h2>
+                <p>Your uploaded photos and roasts are stored securely in our database.</p>
+                <ul>
+                    <li><strong>History Preference:</strong> You can toggle "Save Roast History" off. If toggled off, photos and roasts are not saved to your profile history.</li>
+                    <li><strong>Account Deletion:</strong> You can delete your account at any time. Upon deletion, all associated data is permanently erased.</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">SEC_05 // SECURITY</div>
+                <h2>Security & Contact</h2>
+                <p>We use high-grade administrative, technical, and physical security measures to protect your personal information. No transmission method over the internet is 100% secure.</p>
+                <p>If you have questions, please contact us via the "Report a Problem" feature in the App or email us at roastmyfit0@gmail.com.</p>
+            </div>
+        </div>
+
+        <!-- TERMS OF SERVICE SECTION -->
+        <div id="terms" class="content-section">
+            <div class="title-section">
+                <h1 class="page-title">Terms of Service</h1>
+                <div class="last-updated">PROTOCOL_STABLE // MAY 17, 2026</div>
+            </div>
+
+            <p class="intro">Welcome to <strong>Roast My Fit</strong>. By downloading, accessing, or using our mobile application, you agree to be bound by these Terms of Service. If you do not agree, please do not use the App.</p>
+
+            <div class="section-card">
+                <div class="card-tag">TOS_01 // SCOPE</div>
+                <h2>Description of Service</h2>
+                <p>Roast My Fit is an entertainment application that uses Artificial Intelligence to analyze photos of your outfits and generate humorous, critical, and sometimes harsh commentary ("roasts"), along with a numerical score.</p>
+                <p><strong>IMPORTANT DISCLAIMER:</strong> The roasts generated by the App are for comedic and entertainment purposes only. The AI is designed to be highly critical. By using this App, you acknowledge that the commentary may be harsh and you agree not to take it personally.</p>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">TOS_02 // COMPLIANCE</div>
+                <h2>User Content & Conduct</h2>
+                <ul>
+                    <li><strong>Ownership:</strong> You retain ownership of the photos you upload.</li>
+                    <li><strong>License:</strong> By uploading, you grant us a worldwide, non-exclusive, royalty-free license to store and process these photos strictly for the purpose of operating the App.</li>
+                    <li><strong>Prohibited Content:</strong> You agree NOT to upload photos of individuals without consent, nudity, sexually explicit material, illegal content, or copyrighted material you do not own.</li>
+                    <li>We reserve the right to ban users or delete content that violates these rules.</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">TOS_03 // COMMERCE</div>
+                <h2>Credits & Payments</h2>
+                <ul>
+                    <li><strong>Credits:</strong> The App operates on a credit system. Generating a roast consumes credits.</li>
+                    <li><strong>Purchases:</strong> You may purchase additional credits via our secure payment processor.</li>
+                    <li><strong>No Refunds:</strong> All purchases are final and non-refundable, except where required by law.</li>
+                    <li><strong>Account Deletion:</strong> If you delete your account, any remaining credits are forfeited.</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">TOS_04 // LIMITATION</div>
+                <h2>Disclaimer & Liability</h2>
+                <p>THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE." WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED. WE DO NOT GUARANTEE THAT THE AI RESPONSES WILL BE ACCURATE, APPROPRIATE, OR ERROR-FREE.</p>
+                <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, ROAST MY FIT SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES RESULTING FROM YOUR USE OF THE APP.</p>
+            </div>
+
+            <div class="section-card">
+                <div class="card-tag">TOS_05 // AMENDMENT</div>
+                <h2>Modifications to the Terms</h2>
+                <p>We reserve the right to modify these Terms at any time. Your continued use of the App after changes are posted constitutes your acceptance of the new Terms. For any questions, please contact us at roastmyfit0@gmail.com.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <img src="https://res.cloudinary.com/dhvlz8sfk/image/upload/v1779007219/icon_be9csc.png" alt="Logo" class="footer-logo">
+        <div class="footer-meta-container">
+            <div class="footer-text-line">ROAST_MY_FIT // LEGAL_DOCS_V2.02</div>
+            <div class="footer-text-line">SECURE_TRANS_LAYER // ENCRYPT_AES_256</div>
+            <div class="copyright">ALL RIGHTS RESERVED © 2026</div>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabId) {
+            const sections = document.querySelectorAll('.content-section');
+            const btns = document.querySelectorAll('.tab-btn');
+            
+            // Remove active classes
+            btns.forEach(btn => btn.classList.remove('active'));
+            sections.forEach(sec => {
+                sec.style.opacity = '0';
+                sec.style.transform = 'translateY(5px)';
+                setTimeout(() => {
+                    sec.classList.remove('active');
+                }, 200);
+            });
+            
+            // Add active class to clicked button
+            if (tabId === 'privacy') {
+                btns[0].classList.add('active');
+            } else {
+                btns[1].classList.add('active');
+            }
+            
+            // Show new section with animation
+            setTimeout(() => {
+                const target = document.getElementById(tabId);
+                target.classList.add('active');
+                // Trigger reflow
+                void target.offsetWidth;
+                target.style.opacity = '1';
+                target.style.transform = 'translateY(0)';
+            }, 200);
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
